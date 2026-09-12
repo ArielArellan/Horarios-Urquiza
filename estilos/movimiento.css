@@ -1,0 +1,5 @@
+/* Va ultimo a proposito: es un override global sobre todo lo anterior. */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

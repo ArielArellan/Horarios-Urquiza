@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5b02c">
+<title>Próximo Tren Urquiza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<!-- Los estilos se compilan desde estilos/*.css con `npm run build`. -->
+<link rel="stylesheet" href="dist/app.css">
+<!-- Los horarios se piden apenas carga la página; conviene adelantarlo. -->
+<link rel="preload" href="horarios.json" as="fetch" crossorigin>
+</head>
+<body>
+<main class="hoja">
+
+  <header class="marca">
+    <span class="marca__linea">Urquiza</span>
+    <h1 class="marca__nombre">Próximo tren</h1>
+    <span class="marca__vigencia" id="vigencia"></span>
+  </header>
+
+  <section class="panel" aria-label="Buscar un viaje">
+    <div class="trayecto">
+      <div class="trayecto__campos">
+        <div>
+          <label class="rotulo" for="origen">Subo en</label>
+          <select id="origen"></select>
+        </div>
+        <div>
+          <label class="rotulo" for="destino">Bajo en</label>
+          <select id="destino"></select>
+        </div>
+      </div>
+      <button class="invertir" id="invertir" type="button" title="Invertir el viaje" aria-label="Invertir origen y destino">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 4v16M7 20l-3-3M7 20l3-3M17 20V4M17 4l-3 3M17 4l3 3"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cuando">
+      <div>
+        <span class="rotulo" id="rotulo-modo">Buscar por</span>
+        <div class="conmutador" role="group" aria-labelledby="rotulo-modo">
+          <button type="button" id="modo-salida" aria-pressed="true">Salgo a las</button>
+          <button type="button" id="modo-llegada" aria-pressed="false">Llego antes de</button>
+        </div>
+      </div>
+      <div>
+        <label class="rotulo" for="hora">Hora</label>
+        <div class="reloj">
+          <input type="time" id="hora" step="60">
+          <button class="ahora" type="button" id="ahora" hidden>Ahora</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label class="rotulo" for="dia">Día</label>
+      <select id="dia"></select>
+    </div>
+  </section>
+
+  <noscript>
+    <p class="aviso-js"><b>Falta JavaScript.</b> La página lo necesita para
+      calcular los horarios: los datos se piden y se cruzan en el navegador.</p>
+  </noscript>
+  <p class="aviso-js" id="aviso-js" hidden></p>
+
+  <script>
+  // Desde un teléfono no hay consola: si algo revienta, la página se queda a
+  // medias y sin explicación. Este cartel convierte ese silencio en un mensaje.
+  //
+  // Va acá a mano, en JS viejo, y NO en src/: tiene que correr antes que el
+  // bundle para poder avisar cuando el que falla es el bundle mismo. Compilado
+  // junto con lo que vigila, se moriría de lo mismo. Por eso queda fuera del
+  // tsconfig.
+  (function () {
+    function avisar(detalle) {
+      var caja = document.getElementById("aviso-js");
+      if (!caja) { return; }
+      caja.innerHTML = "<b>La página no cargó del todo.</b>" +
+        "Probá recargarla. Detalle: <code></code>";
+      caja.querySelector("code").textContent = detalle || "error desconocido";
+      caja.hidden = false;
+    }
+    window.addEventListener("error", function (ev) {
+      avisar(ev && ev.message);
+    });
+    // Los horarios se piden con fetch: si eso falla, no hay un evento "error",
+    // hay una promesa rechazada. Sin esto el fallo más probable de la página
+    // sería justo el que no avisa nada.
+    window.addEventListener("unhandledrejection", function (ev) {
+      var r = ev && ev.reason;
+      avisar(r && r.message ? r.message : String(r));
+    });
+  }());
+  </script>
+
+  <div class="rumbo">
+    <span class="rumbo__sentido" id="sentido"></span>
+    <span class="rumbo__detalle" id="detalle"></span>
+  </div>
+
+  <section class="salidas" id="salidas" aria-live="polite"></section>
+
+  <details class="recorrido" id="recorrido">
+    <summary id="resumen-recorrido">Ver todas las paradas del tren elegido</summary>
+    <ul class="paradas" id="paradas"></ul>
+  </details>
+
+  <footer class="pie">
+    <p id="pie-fuente"></p>
+    <p>Los feriados usan el horario de domingos. Consultá siempre el estado del servicio antes de viajar.</p>
+  </footer>
+
+</main>
+
+<!-- El código se compila desde src/*.ts con `npm run build`. `defer` lo deja
+     correr cuando el DOM ya está armado, sin bloquear el pintado. -->
+<script src="dist/app.js" defer></script>
+</body>
+</html>

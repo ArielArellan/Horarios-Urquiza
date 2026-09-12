@@ -1,0 +1,36 @@
+/* El titulo de la pagina y la franja de vigencia. */
+
+.marca {
+  display: flex;
+  align-items: baseline;
+  gap: .55rem;
+  padding: 1.4rem 0 1rem;
+}
+.marca__linea {
+  font-family: var(--dato);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  /* El amarillo del Urquiza tal cual, con tinta oscura encima: es la chapa de
+     la linea, lo primero que se ve. Al reves (texto claro sobre amarillo) no
+     se leeria. */
+  color: var(--ambar-tinta);
+  background: var(--ambar);
+  padding: .2rem .45rem;
+  border-radius: 3px;
+}
+.marca__nombre {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+.marca__vigencia {
+  margin-left: auto;
+  font-size: .72rem;
+  color: var(--tinta-3);
+  text-align: right;
+  max-width: 9rem;
+  line-height: 1.25;
+}

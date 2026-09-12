@@ -1,0 +1,9 @@
+# Dependencias de la compilacion. No van al repo: son decenas de MB y traen
+# binarios propios de cada plataforma. Se reinstalan con `npm install`.
+node_modules/
+
+*.tsbuildinfo
+dist/*.map
+
+# dist/app.js SI va al repo, a proposito: es lo que deja que
+# parse_horarios.py regenere index.html en una maquina sin Node.

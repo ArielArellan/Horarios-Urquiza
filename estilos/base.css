@@ -1,0 +1,92 @@
+/* Los colores, las tipografias y el reset. Todo lo demas usa estas
+   variables: cambiarlas aca cambia la pagina entera.
+
+   La paleta es el amarillo del Urquiza (#f5b02c) sobre grises y blanco. Los
+   grises son variantes del #515151 de Metrovias; las superficies claras,
+   blanco. No hay ningun otro color: lo que no es amarillo es neutro.
+
+   Por que hay dos amarillos: el oficial es claro. Sobre blanco da 1.9:1, muy
+   lejos del 4.5:1 que hace falta para leer un texto chico. Asi que #f5b02c va
+   siempre de relleno (--ambar, con --ambar-tinta encima) y donde hace falta
+   amarillo en un texto o un borde va --ambar-oscuro. En el tema oscuro no
+   hace falta la distincion: ahi el oficial se lee perfecto y es el que se usa.
+
+   El tema oscuro esta dos veces a proposito: por preferencia del sistema
+   y por un data-theme explicito en el <html>, para poder forzarlo. */
+
+:root {
+  --tinta:      #2b2b2b;
+  --tinta-2:    #515151;
+  --tinta-3:    #696969;
+  --fondo:      #f1f2f2;
+  --panel:      #ffffff;
+  --linea:      #dbdddd;
+  --linea-suave:#eaecec;
+  --ambar-oscuro:#8a5f0f;
+  --ambar-cl:   #fcf0d9;
+  --sombra:     0 1px 2px rgba(0, 0, 0, .07), 0 8px 24px -12px rgba(0, 0, 0, .22);
+
+  /* El amarillo oficial y su tinta, iguales en los dos temas: son la marca,
+     asi que la chapa URQUIZA y el modo activo se ven igual con tema claro y
+     con oscuro. Va siempre de relleno, nunca de texto.
+
+     El amarillo senala la linea y el proximo tren. Todo lo demas —lo que se
+     elige, los bordes, los estados— se resuelve con los grises: si se pinta
+     de amarillo tambien eso, el amarillo deja de querer decir algo. */
+  --ambar:      #f5b02c;
+  --ambar-tinta:#3a2a06;
+
+  --texto: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --dato:  "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --tinta:      #ededed;
+    --tinta-2:    #b3b3b3;
+    --tinta-3:    #949494;
+    --fondo:      #151515;
+    --panel:      #1e1e1e;
+    --linea:      #343434;
+    --linea-suave:#272727;
+    --ambar-oscuro:#f5b02c;
+    --ambar-cl:   #32270e;
+    --sombra:     0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -12px rgba(0, 0, 0, .7);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --tinta:      #ededed;
+  --tinta-2:    #b3b3b3;
+  --tinta-3:    #949494;
+  --fondo:      #151515;
+  --panel:      #1e1e1e;
+  --linea:      #343434;
+  --linea-suave:#272727;
+  --ambar-oscuro:#f5b02c;
+  --ambar-cl:   #32270e;
+  --sombra:     0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -12px rgba(0, 0, 0, .7);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--texto);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-text-size-adjust: 100%;
+}
+
+.hoja {
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: 0 1rem env(safe-area-inset-bottom) 1rem;
+  padding-bottom: calc(2.5rem + env(safe-area-inset-bottom));
+}

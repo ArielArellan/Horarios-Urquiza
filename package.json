@@ -1,0 +1,25 @@
+{
+  "name": "horarios-urquiza",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Proximo tren Urquiza: el sitio estatico. Consume un horarios.json; de donde sale ese archivo no es asunto de este proyecto.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json && tsc -p tests/tsconfig.json",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "check": "npm run typecheck && npm test",
+    "build": "npm run check && npm run build:js && npm run build:css",
+    "build:js": "esbuild src/principal.ts --bundle --minify --format=iife --platform=browser --target=es2017 --charset=utf8 --legal-comments=none --outfile=dist/app.js",
+    "build:css": "esbuild estilos/index.css --bundle --minify --charset=utf8 --legal-comments=none --outfile=dist/app.css",
+    "build:debug": "esbuild src/principal.ts --bundle --format=iife --platform=browser --target=es2017 --charset=utf8 --outfile=dist/app.js && esbuild estilos/index.css --bundle --charset=utf8 --outfile=dist/app.css",
+    "servir": "python -m http.server 8000"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.9.0"
+  }
+}

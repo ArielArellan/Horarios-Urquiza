@@ -1,0 +1,129 @@
+/* El rumbo y las tarjetas de los proximos trenes. */
+
+.rumbo {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  flex-wrap: wrap;
+  padding: 1.5rem .2rem .6rem;
+}
+.rumbo__sentido {
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--urquiza);
+}
+.rumbo__detalle {
+  font-family: var(--dato);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  color: var(--tinta-3);
+  text-transform: uppercase;
+}
+
+.salidas { display: grid; gap: .5rem; }
+
+.salida {
+  background: var(--panel);
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  padding: .8rem .9rem;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .9rem;
+  /* Cada tren es un boton: al tocarlo se ven sus paradas. */
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.salida:hover { border-color: var(--tinta-3); }
+.salida:focus-visible { outline: 2px solid var(--ambar-oscuro); outline-offset: 2px; }
+.salida--proxima {
+  box-shadow: var(--sombra);
+  padding: 1rem .9rem;
+  /* La franja amarilla dice "este es el proximo". El turquesa queda para lo
+     que el usuario elige, asi los dos colores significan cosas distintas.
+     El borde izquierdo reemplaza al de 1px: se compensa el padding. */
+  border-left: 5px solid var(--ambar);
+  padding-left: calc(.9rem - 4px);
+}
+/* Lo elegido se marca con gris, no con color: el amarillo esta reservado para
+   la linea y para el proximo tren. La primera tarjeta suele ser las dos cosas
+   a la vez, asi que tienen que poder distinguirse. */
+.salida--elegida {
+  border-color: var(--tinta-2);
+  background: var(--linea-suave);
+}
+
+.salida__hora {
+  font-family: var(--dato);
+  font-size: 1.55rem;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+/* La hora del proximo va en tinta comun: la destacan el cuerpo mas grande y
+   la franja amarilla, no un color propio. */
+.salida--proxima .salida__hora { font-size: 2.15rem; }
+
+.salida__tramo {
+  display: grid;
+  gap: .12rem;
+  min-width: 0;
+}
+.salida__llegada {
+  font-size: .9rem;
+  color: var(--tinta-2);
+  font-variant-numeric: tabular-nums;
+}
+.salida__llegada b { color: var(--tinta); font-weight: 600; }
+.salida__meta {
+  font-family: var(--dato);
+  font-size: .66rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--tinta-3);
+}
+
+.cuenta {
+  font-family: var(--dato);
+  font-size: .8rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--tinta-2);
+  text-align: right;
+  white-space: nowrap;
+}
+.salida--proxima .cuenta { color: var(--ambar-oscuro); font-size: .95rem; }
+
+.marbete {
+  display: inline-block;
+  font-family: var(--dato);
+  font-size: .6rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .1rem .35rem;
+  border-radius: 4px;
+  margin-left: .35rem;
+  vertical-align: .06em;
+}
+/* El de dia es informativo y va en gris; el de nota avisa algo, y para eso
+   esta el amarillo. */
+.marbete--dia  { background: var(--linea-suave); color: var(--tinta-2); }
+.marbete--nota { background: var(--ambar);       color: var(--ambar-tinta); }
+
+.vacio {
+  background: var(--panel);
+  border: 1px dashed var(--linea);
+  border-radius: 12px;
+  padding: 1.6rem 1.1rem;
+  text-align: center;
+  color: var(--tinta-2);
+  font-size: .92rem;
+}

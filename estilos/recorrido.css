@@ -1,0 +1,39 @@
+/* El desplegable con todas las paradas del tren elegido. */
+
+.recorrido { margin-top: .9rem; }
+.recorrido > summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--dato);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--tinta-3);
+  padding: .5rem .2rem;
+}
+.recorrido > summary::-webkit-details-marker { display: none; }
+.recorrido > summary::before { content: "▸ "; }
+.recorrido[open] > summary::before { content: "▾ "; }
+
+.paradas {
+  list-style: none;
+  margin: .2rem 0 0;
+  padding: .3rem 0;
+  border-top: 1px solid var(--linea-suave);
+}
+.paradas li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  padding: .3rem .2rem;
+  font-size: .88rem;
+  color: var(--tinta-2);
+  border-bottom: 1px solid var(--linea-suave);
+}
+.paradas li:last-child { border-bottom: 0; }
+.paradas li b { font-weight: 600; color: var(--tinta); }
+.paradas time {
+  font-family: var(--dato);
+  font-variant-numeric: tabular-nums;
+}

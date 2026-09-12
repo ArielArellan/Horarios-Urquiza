@@ -1,0 +1,13 @@
+/* El punto de entrada de la hoja de estilos. esbuild resuelve estos @import
+   y los pega en dist/app.css, que es lo que enlaza index.html.
+
+   El orden es la cascada: base primero, y despues de arriba hacia abajo
+   como aparecen en la pagina. */
+
+@import "./base.css";
+@import "./encabezado.css";
+@import "./panel.css";
+@import "./salidas.css";
+@import "./recorrido.css";
+@import "./pie.css";
+@import "./movimiento.css";

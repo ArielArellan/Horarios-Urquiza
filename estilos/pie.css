@@ -1,0 +1,27 @@
+/* El pie de pagina y el cartel de error de JavaScript. */
+
+.pie {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--linea);
+  font-size: .74rem;
+  line-height: 1.5;
+  color: var(--tinta-3);
+}
+.pie p { margin: .35rem 0; }
+
+.aviso-js {
+  margin: .9rem 0 0;
+  padding: .7rem .8rem;
+  /* El borde lleva el amarillo del Urquiza tal cual; el texto, la variante
+     oscura, que es la unica que se lee sobre el fondo claro. */
+  border: 1px solid var(--ambar);
+  border-radius: 10px;
+  background: var(--ambar-cl);
+  color: var(--ambar-oscuro);
+  font-size: .85rem;
+  line-height: 1.35;
+}
+.aviso-js b { display: block; font-weight: 600; }
+.aviso-js strong { font-weight: 600; }
+.aviso-js code { font-family: var(--dato); font-size: .82em; word-break: break-word; }
